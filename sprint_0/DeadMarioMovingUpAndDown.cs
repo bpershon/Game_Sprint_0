@@ -5,36 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace sprint_0
 {
     public class DeadMarioMovingUpAndDown : ISprite
     {
+        Texture2D Texture;
+        int SpriteSheetImageWidth;
+        int SpriteSheetImageHeight;
+        int DrawPosX = 400;
+        int DrawPosY = 358;
+        int OriginX = 0;
+        int OriginY = 0;
+        int SpriteDrawScale = 2;
+        bool ReachedMaxYCoord = false;
+        int MaxYCoord = 200;
+        int CurrentYCoord;
 
-        private Texture2D Texture { get; }
-        int imageWidth;// Columns;
-        int imageHeight;// Rows;
-        int xCoord = 400;
-        static int yCoord = 358;
-        int originX = 0;
-        int originY = 0;
-        int scale = 2;
-        //animation variables
-        bool reachedMaxYCoord = false;
-        int maxYCoord = 200;
-        int currentYCord = yCoord;
-
-        public DeadMarioMovingUpAndDown(Texture2D texture)
+        public DeadMarioMovingUpAndDown(ContentManager content)
         {
-            Texture = texture;
-            imageWidth = Texture.Width; 
-            imageHeight = Texture.Height;
+            this.Texture = content.Load<Texture2D>("mario_dead");
+            SpriteSheetImageWidth = Texture.Width; 
+            SpriteSheetImageHeight = Texture.Height;
+            CurrentYCoord = DrawPosY;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle sourceRectangle = new Rectangle(originX, originY, imageWidth, imageHeight);
-            Rectangle destinationRectangle = new Rectangle(xCoord, currentYCord, imageWidth * scale, imageHeight * scale);
+            Rectangle sourceRectangle = new Rectangle(OriginX, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(DrawPosX, CurrentYCoord, SpriteSheetImageWidth * SpriteDrawScale, SpriteSheetImageHeight * SpriteDrawScale);
             spriteBatch.Begin();
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
@@ -42,22 +42,22 @@ namespace sprint_0
 
         public void Update()
         {
-            if (currentYCord == maxYCoord)
+            if (CurrentYCoord == MaxYCoord)
             {
-                reachedMaxYCoord = true;
+                ReachedMaxYCoord = true;
             }
-            else if (currentYCord == yCoord)
+            else if (CurrentYCoord == DrawPosY)
             {
-                reachedMaxYCoord = false;
+                ReachedMaxYCoord = false;
             }
 
-            if (reachedMaxYCoord)
+            if (ReachedMaxYCoord)
             {
-                currentYCord++;
+                CurrentYCoord++;
             }
             else
             {
-                currentYCord--;
+                CurrentYCoord--;
             }
         }
     }

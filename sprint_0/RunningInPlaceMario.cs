@@ -5,37 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace sprint_0
 {
     public class RunningInPlaceMario : ISprite
     {
+        Texture2D Texture;
+        int SpriteSheetImageWidth;
+        int SpriteSheetImageHeight;
+        int DrawPosX = 400;
+        int DrawPosY = 358;
+        int OriginX = 0;
+        int OriginY = 0;
+        int SpriteDrawScale = 2;
+        int TotalSpriteFrames = 2;
+        int CurrentSpriteFrame;
+        int UpdateSpriteAnimation;
+        int UpdateSpriteAnimationThreshold = 3;
 
-
-        private Texture2D Texture { get; }
-        int imageWidth;// Columns;
-        int imageHeight;// Rows;
-        int xCoord = 400;
-        int yCoord = 358;
-        int originX = 0;
-        int originY = 0;
-        int scale = 2;
-        //Animation variables
-        int curretFrame = 1;
-        int totalFrame = 2;
-
-        public RunningInPlaceMario(Texture2D texture)
+        public RunningInPlaceMario(ContentManager content)
         {
-            Texture = texture;
-            imageWidth = Texture.Width / 2;
-            imageHeight = Texture.Height;
+            this.Texture = content.Load<Texture2D>("mario_running_inplace");
+            SpriteSheetImageWidth = Texture.Width / TotalSpriteFrames;
+            SpriteSheetImageHeight = Texture.Height;
+            CurrentSpriteFrame = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int column = curretFrame % totalFrame;
-            Rectangle sourceRectangle = new Rectangle(originX * column, originY, imageWidth, imageHeight);
-            Rectangle destinationRectangle = new Rectangle(xCoord, yCoord, imageWidth * scale, imageHeight * scale);
+            int column = CurrentSpriteFrame % TotalSpriteFrames;
+            Rectangle sourceRectangle = new Rectangle(SpriteSheetImageWidth * column, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(DrawPosX, DrawPosY, SpriteSheetImageWidth * SpriteDrawScale, SpriteSheetImageHeight * SpriteDrawScale);
             spriteBatch.Begin();
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
@@ -43,9 +44,17 @@ namespace sprint_0
 
         public void Update()
         {
-            curretFrame++;
-            if (curretFrame == totalFrame)
-                curretFrame = 0;
+            UpdateSpriteAnimation++;
+            if (UpdateSpriteAnimation == UpdateSpriteAnimationThreshold)
+            {
+                UpdateSpriteAnimation = 0;
+                CurrentSpriteFrame++;
+                if (CurrentSpriteFrame == TotalSpriteFrames)
+                    CurrentSpriteFrame = 0;
+            }
+
         }
     }
 }
+
+
