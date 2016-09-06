@@ -1,56 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace sprint_0
+namespace Sprint_0
 {
     public class RunningInPlaceMario : ISprite
     {
-        Texture2D Texture;
-        int SpriteSheetImageWidth;
-        int SpriteSheetImageHeight;
-        int DrawPosX = 400;
-        int DrawPosY = 358;
-        int OriginX = 0;
-        int OriginY = 0;
-        int SpriteDrawScale = 2;
-        int TotalSpriteFrames = 2;
-        int CurrentSpriteFrame;
-        int UpdateSpriteAnimation;
-        int UpdateSpriteAnimationThreshold = 3;
+        Texture2D texture;
+        int spriteSheetImageWidth;
+        int spriteSheetImageHeight;
+        int drawPosX = 400;
+        int drawPosY = 358;
+        int origin = 0;
+        int spriteDrawScale = 2;
+        int totalSpriteFrames = 2;
+        int currentSpriteFrame;
+        int updateSpriteAnimation;
+        int updateSpriteAnimationThreshold = 3;
 
         public RunningInPlaceMario(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("mario_running_inplace");
-            SpriteSheetImageWidth = Texture.Width / TotalSpriteFrames;
-            SpriteSheetImageHeight = Texture.Height;
-            CurrentSpriteFrame = 0;
+            this.texture = content.Load<Texture2D>("mario_running_inplace");
+            spriteSheetImageWidth = texture.Width / totalSpriteFrames;
+            spriteSheetImageHeight = texture.Height;
+            currentSpriteFrame = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int column = CurrentSpriteFrame % TotalSpriteFrames;
-            Rectangle sourceRectangle = new Rectangle(SpriteSheetImageWidth * column, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
-            Rectangle destinationRectangle = new Rectangle(DrawPosX, DrawPosY, SpriteSheetImageWidth * SpriteDrawScale, SpriteSheetImageHeight * SpriteDrawScale);
+            int column = currentSpriteFrame % totalSpriteFrames;
+            Rectangle sourceRectangle = new Rectangle(spriteSheetImageWidth * column, origin, spriteSheetImageWidth, spriteSheetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(drawPosX, drawPosY, spriteSheetImageWidth * spriteDrawScale, spriteSheetImageHeight * spriteDrawScale);
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 
         public void Update()
         {
-            UpdateSpriteAnimation++;
-            if (UpdateSpriteAnimation == UpdateSpriteAnimationThreshold)
+            updateSpriteAnimation++;
+            if (updateSpriteAnimation == updateSpriteAnimationThreshold)
             {
-                UpdateSpriteAnimation = 0;
-                CurrentSpriteFrame++;
-                if (CurrentSpriteFrame == TotalSpriteFrames)
-                    CurrentSpriteFrame = 0;
+                updateSpriteAnimation = 0;
+                currentSpriteFrame++;
+                if (currentSpriteFrame == totalSpriteFrames)
+                    currentSpriteFrame = 0;
             }
 
         }

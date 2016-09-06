@@ -2,28 +2,28 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace sprint_0
+namespace Sprint_0
 {
     class WorldBackgound : ISprite
     {
-        Texture2D Texture;
-        int SpriteSheetImageWidth;
-        int SpriteSheetImageHeight;
-        int OriginX = 0;
-        int OriginY = 0;
+        Texture2D texture;
+        int spriteSheetImageWidth;
+        int spriteSheetImageHeight;
+        int originX = 0;
+        int originY = 0;
 
         public WorldBackgound(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("super-mario-bros-level-1-1");
-            SpriteSheetImageWidth = Texture.Width;
-            SpriteSheetImageHeight = Texture.Height;
+            this.texture = content.Load<Texture2D>("super-mario-bros-level-1-1");
+            spriteSheetImageWidth = texture.Width;
+            spriteSheetImageHeight = texture.Height;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle sourceRectangle = new Rectangle(OriginX, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
-            Rectangle destinationRectangle = new Rectangle(OriginX, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
+            Rectangle sourceRectangle = new Rectangle(originX, originY, spriteSheetImageWidth, spriteSheetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(originX, originY, spriteSheetImageWidth, spriteSheetImageHeight);
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 

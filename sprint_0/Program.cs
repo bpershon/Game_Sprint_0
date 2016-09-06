@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace sprint_0
+namespace Sprint_0
 {
 #if WINDOWS || LINUX
     /// <summary>

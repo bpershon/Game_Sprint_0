@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace sprint_0
+﻿namespace Sprint_0
 {
     class MarioStandStillCommand : ICommand
     {
-        private Game1 MyGame;
+        private Game1 myGame;
 
         public MarioStandStillCommand(Game1 game)
         {
-            MyGame = game;
+            myGame = game;
         }
 
         public void Execute()
         {
-            MyGame.MarioSprite = new StandingInPlaceMario(MyGame.Content);
+            myGame.marioSprite = new StandingInPlaceMario(myGame.Content);
         }
     }
 }

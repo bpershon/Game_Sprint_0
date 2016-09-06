@@ -2,33 +2,33 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace sprint_0
+namespace Sprint_0
 {
     public class StandingInPlaceMario : ISprite
     {
 
-        Texture2D Texture;
-        int SpriteSheetImageWidth;
-        int SpriteSHeetImageHeight;
-        int DrawPosX = 400;
-        int DrawPosY = 358;
-        int OriginX = 0;
-        int OriginY = 0;
-        int SpriteDrawScale = 2;
+        Texture2D texture;
+        int spriteSheetImageWidth;
+        int spriteSHeetImageHeight;
+        int drawPosX = 400;
+        int drawPosY = 358;
+        int originX = 0;
+        int originY = 0;
+        int spriteDrawScale = 2;
 
         public StandingInPlaceMario(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("mario_standing");
-            SpriteSheetImageWidth = Texture.Width;
-            SpriteSHeetImageHeight = Texture.Height;
+            this.texture = content.Load<Texture2D>("mario_standing");
+            spriteSheetImageWidth = texture.Width;
+            spriteSHeetImageHeight = texture.Height;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle sourceRectangle = new Rectangle(OriginX, OriginY, SpriteSheetImageWidth, SpriteSHeetImageHeight);
-            Rectangle destinationRectangle = new Rectangle(DrawPosX, DrawPosY, SpriteSheetImageWidth * SpriteDrawScale, SpriteSHeetImageHeight * SpriteDrawScale);
+            Rectangle sourceRectangle = new Rectangle(originX, originY, spriteSheetImageWidth, spriteSHeetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(drawPosX, drawPosY, spriteSheetImageWidth * spriteDrawScale, spriteSHeetImageHeight * spriteDrawScale);
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 

@@ -1,65 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*@Author Brad Pershon
+ * CSE 3902 Sprint 0
+ * Created on: 9/2/16
+ * Updated on: 9/6/16
+ */
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace sprint_0
+namespace Sprint_0
 {
     public class RunningLeftMario : ISprite
     {
-        Texture2D Texture;
-        int SpriteSheetImageWidth;
-        int SpriteSheetImageHeight;
-        int DrawPosX = 400;
-        int DrawPosY = 358;
-        int OriginX = 0;
-        int OriginY = 0;
-        int SpriteDrawScale = 2;
-        int CurrentSpriteFrame;
-        int TotalSpriteFrames = 2;
-        int UpdateSpriteAnimation;
-        int UpdateSpriteAnimationThreshold = 3;
-        int MarioMovementSpeed = 7;
-        int EndOfScreenLeft = -50;
-        int EndOfScreenrIght = 800;
+        Texture2D texture;
+        int spriteSheetImageWidth;
+        int spriteSheetImageHeight;
+        int drawPosX = 400;
+        int drawPosY = 358;
+        int origin = 0;
+        int spriteDrawScale = 2;
+        int currentSpriteFrame;
+        int totalSpriteFrames = 2;
+        int updateSpriteAnimation;
+        int updateSpriteAnimationThreshold = 3;
+        int marioMovementSpeed = 7;
+        int endOfScreenLeft = -50;
+        int endOfScreenrIght = 800;
 
         public RunningLeftMario(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("mario_running_inplace");
-            SpriteSheetImageWidth = Texture.Width / TotalSpriteFrames;
-            SpriteSheetImageHeight = Texture.Height;
-            CurrentSpriteFrame = 0;
+            this.texture = content.Load<Texture2D>("mario_running_inplace");
+            spriteSheetImageWidth = texture.Width / totalSpriteFrames;
+            spriteSheetImageHeight = texture.Height;
+            currentSpriteFrame = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int column = CurrentSpriteFrame % TotalSpriteFrames;
-            Rectangle sourceRectangle = new Rectangle(SpriteSheetImageWidth * column, OriginY, SpriteSheetImageWidth, SpriteSheetImageHeight);
-            Rectangle destinationRectangle = new Rectangle(DrawPosX, DrawPosY, SpriteSheetImageWidth * SpriteDrawScale, SpriteSheetImageHeight * SpriteDrawScale);
+            int column = currentSpriteFrame % totalSpriteFrames;
+            Rectangle sourceRectangle = new Rectangle(spriteSheetImageWidth * column, origin, spriteSheetImageWidth, spriteSheetImageHeight);
+            Rectangle destinationRectangle = new Rectangle(drawPosX, drawPosY, spriteSheetImageWidth * spriteDrawScale, spriteSheetImageHeight * spriteDrawScale);
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 
         public void Update()
         {
-            UpdateSpriteAnimation++;
-            if (UpdateSpriteAnimation == UpdateSpriteAnimationThreshold)
+            updateSpriteAnimation++;
+            if (updateSpriteAnimation == updateSpriteAnimationThreshold)
             {
-                UpdateSpriteAnimation = 0;
-                CurrentSpriteFrame++;
-                DrawPosX -= MarioMovementSpeed;
-                if (CurrentSpriteFrame == TotalSpriteFrames)
+                updateSpriteAnimation = 0;
+                currentSpriteFrame++;
+                drawPosX -= marioMovementSpeed;
+                if (currentSpriteFrame == totalSpriteFrames)
                 {
-                    CurrentSpriteFrame = 0;
+                    currentSpriteFrame = 0;
                 }
-                if (DrawPosX <= EndOfScreenLeft)
+                if (drawPosX <= endOfScreenLeft)
                 {
-                    DrawPosX = EndOfScreenrIght;
+                    drawPosX = endOfScreenrIght;
                 }
             }
         }

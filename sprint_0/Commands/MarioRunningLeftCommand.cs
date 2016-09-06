@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace sprint_0
+﻿namespace Sprint_0
 {
     class MarioRunningLeftCommand : ICommand
     {
-        private Game1 MyGame;
+        private Game1 myGame;
 
         public MarioRunningLeftCommand(Game1 game)
         {
-            MyGame = game;
+            myGame = game;
         }
 
         public void Execute()
         {
-            MyGame.MarioSprite = new RunningLeftMario(MyGame.Content);
+            myGame.marioSprite = new RunningLeftMario(myGame.Content);
         }
     }
 }
