@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace sprint_0
 {
-    public class RunningLeftAndRightMario : ISprite
+    public class RunningLeftMario : ISprite
     {
         Texture2D Texture;
         int SpriteSheetImageWidth;
@@ -27,7 +27,7 @@ namespace sprint_0
         int EndOfScreenLeft = -50;
         int EndOfScreenrIght = 800;
 
-        public RunningLeftAndRightMario(ContentManager content)
+        public RunningLeftMario(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("mario_running_inplace");
             SpriteSheetImageWidth = Texture.Width / TotalSpriteFrames;

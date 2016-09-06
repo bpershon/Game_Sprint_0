@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace sprint_0
 {
-    public interface IController
+    public interface ICommand
     {
+        void Execute();
     }
 }
